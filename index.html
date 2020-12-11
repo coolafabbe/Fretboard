@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Visual Fretboard</title>
+
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <style type="text/css">
+            body {
+                background-color: #f0f0f2;              
+                background-image: url('background.jpg');
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-attachment: fixed;
+                background-position: center;
+
+                margin: 0;
+                padding: 0;
+                
+                font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            }
+            div {
+                width: 1500px;
+                margin: 2em auto;
+                padding: 2em;
+                background-color: #ffffff;
+                border-radius: 0.2em;
+                box-shadow: 2px 3px 7px 2px rgba(0,0,0,0.02);
+            }
+            a:link, a:visited {
+                color: #38488f;
+                text-decoration: none;
+            }
+            @media (max-width: 700px) {
+                div {
+                    margin: 1em auto;
+                    width: max-content;
+                }
+            }
+        </style> 
+    </head>
+    <body>
+        <div>
+            <h1 id="Header">Visual Fretboard</h1>
+            <p id="step1">
+                <form>
+                    <label for="Root"><strong>Step1:</strong> Choose a root note:</label> 
+                    <br>
+                    <select name="Root" id="Root">
+                        <option value="C">      C       </option>
+                        <option value="C#/Db">  C#/Db   </option>
+                        <option value="D">      D       </option>
+                        <option value="D#/Eb">  D#/Eb   </option>
+                        <option value="E">      E       </option>
+                        <option value="F">      F       </option>
+                        <option value="F#/Gb">  F#/Gb   </option>
+                        <option value="G">      G       </option>
+                        <option value="G#/Ab">  G#/Ab   </option>
+                        <option value="A">      A       </option>
+                        <option value="A#/Bb">  A#/Bb   </option>
+                        <option value="B">      B       </option>
+                    </select>
+                </form>
+            </p>
+            <p id="step2">
+                <form>
+                    <label for="Format"><strong>Step2:</strong> Choose a function:</label> 
+                    <br>
+                    <select name="Format" id="Format">
+                        <option value="Intervals">Intervals</option>
+                        <option value="Root">Root</option>
+                        <option value="Chords">Chords</option>
+                        <option value="Scales">Scales</option>
+                    </select>
+                </form>
+            </p>
+            <!--<p id="step3 Intervals">
+                <form> 
+                    <label for="Interval"><strong>Step3:</strong> Choose intervals:</label>
+                    <br>
+                    <input type="checkbox" id="m2">m2
+                    <input type="checkbox" id="M2">M2
+                    <input type="checkbox" id="m3">m3
+                    <input type="checkbox" id="M3">M3
+                    <input type="checkbox" id="P4">P4
+                    <input type="checkbox" id="d5">d5
+                    <input type="checkbox" id="P5">P5
+                    <input type="checkbox" id="m6">m6
+                    <input type="checkbox" id="M6">M6
+                    <input type="checkbox" id="m7">m7
+                    <input type="checkbox" id="M7">M7
+                </form>
+            </p>-->
+            <p id="step3 Choords">
+                <form>
+                    <label for="Choord"><strong>Step3:</strong> Choose a Choord:</label> 
+                    <br>
+                    <select name="Choord" id="Choord">
+                        <option value="major">major</option>
+                        <option value="minor">minor</option>
+                        <option value="aug">aug</option>
+                        <option value="sus4">sus4</option>
+                        <option value="sus2">sus2</option>
+                        <option value="maj7">maj7</option>
+                        <option value="7">7</option>
+                        <option value="m7">m7</option>
+                        <option value="7b5">7b5</option>
+                        <option value="dim">dim</option>
+                        <option value="6">6</option>
+                        <option value="m6">m6</option>
+                        <option value="add9">add9</option>
+                        <option value="9">9</option>
+                        <option value="m9">m9</option>
+                        <option value="6/9">6/9</option>
+                        <option value="11">11</option>
+                        <option value="m11">m11</option>
+                        <option value="13">13</option>
+                    </select>
+                </form>
+            </p>
+            <p id="buttons">
+                <button onclick="Update()">Update</button>
+                <button onclick="Clear()">Clear</button>
+            </p>
+            <!-- 1455, 191-->
+            <canvas id="canvas" width="1455" height="191" style="background: url('fretboard.jpg')"> 
+                HTML element 'Canvas' is not supported on your browser.
+            </canvas>           
+        </div>
+
+        <script type="text/javascript" src="fretboard.js"></script>
+        <script type="text/javascript" src="class.js"></script>
+    </body>
+</html>
