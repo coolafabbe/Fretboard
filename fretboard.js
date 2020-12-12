@@ -52,7 +52,7 @@ function Update() {
     choosenRoot = e.options[e.selectedIndex].value;
     e = document.getElementById("Format");
     let format = e.options[e.selectedIndex].value;
-    e = document.getElementById("Choord");
+    e = document.getElementById("Chord");
     choosenChoord = e.options[e.selectedIndex].value;
 
     // Fill array strings with notes, since the strings can be tuned differently.
