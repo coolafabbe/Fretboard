@@ -1,7 +1,6 @@
-
 //Define notes
 const numOfFrets = 23;
-const allNotes = ["A", "A#/Bb", "B", "C", "C#/Db", "D", "D#/Eb", "E", "F", "F#/Gb", "G", "G#/Ab"];
+const allNotes = ["C", "C#/Db", "D", "D#/Eb", "E", "F", "F#/Gb", "G", "G#/Ab", "A", "A#/Bb", "B"];
 const allIntervals = ["P1", "m2", "M2", "m3", "M3", "P4", "d5", "P5", "m6", "M6", "m7", "M7"];
 const allChoords = [new Choord("major", ["P1", "M3", "P5"]),
                     new Choord("minor", ["P1", "m3", "P5"]),	
@@ -24,11 +23,21 @@ const allChoords = [new Choord("major", ["P1", "M3", "P5"]),
                     new Choord("m11",   ["P1", "M2", "m3", "P4", "P5", "m7"]),
                     new Choord("13",    ["P1", "M2", "M3",, "P5", "M6", "m7"])];
 //const allScales; // TODO
+const allTunings = [new Tunings("Standard",         ["E", "B", "G", "D", "A", "E"]),
+                    new Tunings("Drop D",           ["E", "B", "G", "D", "A", "D"]),
+                    new Tunings("DAGDAD",           ["D", "A", "G", "D", "A", "D"]),
+                    new Tunings("Half-step Down",   ["D#/Eb", "A#/Bb", "F#/Gb", "C#/Db", "G#/Ab", "D#/Eb"]),
+                    new Tunings("Whole-step Down",  ["D", "A", "F", "C", "G", "D"])];
+const noteView = [["Note", "Note names"], 
+                  ["Intervals", "Interval names"], 
+                  ["Root", "Root name and intervals"]];
 
 var choosenRoot = "C"; 
 var choosenChoord = "Major";
 var choosenIntervals = [];
 var choosenNotes = [];
+var choosenTuning = "Standard";
+var choosenNoteView = "Note";
 var strings = [];
 var tuning = ["E", "B", "G", "D", "A", "E"];
 
@@ -41,6 +50,17 @@ var xCoords = [44, 100, 206, 308, 400, 486, 568, 646, 719, 788, 851, 912, 968, 1
 var k = [-0.012383901, -0.00619195, -0.001547988, 0.004643963, 0.01006192, 0.013931889];
 var m = [42.23839009, 63.61919505, 86.15479876, 108.5356037, 129.993808, 152.6068111];
 
+//Content loaded event
+document.addEventListener("DOMContentLoaded", function(event) {
+    console.log("Ready!");
+    changeDropDowns();
+
+    document.getElementById("Step3Intervals").style.display = "none"; 
+    document.getElementById("Step3Chords").style.display = "none"; 
+
+    Update();
+});
+
 // Main update loop to set notes and intervals correctly
 function Update() {
     ctx.clearRect(0, 0, c.width, c.height);
@@ -48,11 +68,11 @@ function Update() {
     choosenNotes.length = 0;
 
     //Update settings from user
-    let e = document.getElementById("Root");
+    let e = document.getElementById("selRoot");
     choosenRoot = e.options[e.selectedIndex].value;
-    e = document.getElementById("Format");
+    e = document.getElementById("selFormat");
     let format = e.options[e.selectedIndex].value;
-    e = document.getElementById("Chord");
+    e = document.getElementById("selChord");
     choosenChoord = e.options[e.selectedIndex].value;
 
     // Fill array strings with notes, since the strings can be tuned differently.
@@ -90,6 +110,46 @@ function Update() {
     }
 }
 
+function changeDropDowns() {
+    // Populate drop down list for root:
+    var selectRoot = document.getElementById("selRoot");
+    allNotes.forEach(element => {
+        var opt = element;
+        var el = document.createElement("option");
+        el.textContent = opt;
+        el.value = opt;
+        selectRoot.appendChild(el);
+    });
+
+    // Populate drop down lists for chords
+    var selectChord = document.getElementById("selChord");
+    allChoords.forEach(element => {
+        var opt = element.getName();
+        var el = document.createElement("option");
+        el.textContent = opt;
+        el.value = opt;
+        selectChord.appendChild(el);
+    });
+
+    // Populate drop down lists for tunings
+    var selectTuning = document.getElementById("selTuning");
+    allTunings.forEach(element => {
+        var opt = element.getName();
+        var el = document.createElement("option");
+        el.textContent = opt;
+        el.value = opt;
+        selectTuning.appendChild(el);
+    });
+
+    var selectText = document.getElementById("selText");
+    noteView.forEach(element => {
+        var el = document.createElement("option");
+        el.textContent = element[1];
+        el.value = element [0];
+        selectText.appendChild(el);
+    });
+}
+
 // Clear canvas
 function Clear() {
     ctx.clearRect(0, 0, c.width, c.height);
@@ -116,6 +176,16 @@ function FindNoteOfInterval(root, interval) {
     return allNotes[i];
 }
 
+function FindIntervalOfNote(root, note) {
+    let i = allNotes.indexOf(root);
+    let j = allNotes.indexOf(note);
+
+    if (j < i)
+        j += allNotes.length;
+
+    return allIntervals[j-i];
+}
+
 function BuildString(startNote) {
     var string = [];
     
@@ -134,6 +204,7 @@ function BuildString(startNote) {
 function DrawNote(canv, string, fret, name, root) {
     let x = xCoords[fret];
     let y = k[string]*x + m[string];
+    var text;
 
     canv.strokeStyle = "white";
     canv.lineWidth = "3";
@@ -149,7 +220,12 @@ function DrawNote(canv, string, fret, name, root) {
     canv.fill();
 
     //Text
-    canv.font = "20px Helvetica";
+    canv.font = "16px Helvetica";
     canv.fillStyle = "white";
-    canv.fillText(name, x-6, y+8);
+    if ((choosenNoteView === "Root" && root != true) || (choosenNoteView === "Intervals"))
+        text = FindIntervalOfNote(choosenRoot, name);     
+    else
+        text = name;
+
+    canv.fillText(text, x-10, y+6);
 }
