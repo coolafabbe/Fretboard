@@ -46,13 +46,11 @@
         <div class="mainContent" id="mainContent">
             <h1 id="Header">Visual Fretboard</h1>
             <p id="step1">
-                <label for="selRoot"><strong>Step1:</strong> Choose a root note:</label> 
-                <br>
+                <label for="selRoot"><strong>Step1:</strong> Choose a root note:</label><br>
                 <select name="selRoot" id="selRoot"></select>
             </p>
             <p id="step2">
-                <label for="selFormat"><strong>Step2:</strong> Choose a function:</label> 
-                <br>
+                <label for="selFormat"><strong>Step2:</strong> Choose a function:</label><br>
                 <select name="selFormat" id="selFormat">
                     <option value="Root">Root</option>
                     <option value="Intervals">Intervals</option>
@@ -90,15 +88,17 @@
                 <p>
                     <select id="selTuning"></select>
                     <select id="selText"></select>
+                    <button onclick="AddChord()">Add chord</button> 
                 </p>
             </div>
             <!-- 1455, 191-->
-            <canvas id="canvas" width="1455" height="191" style="background: url('fretboard.jpg')"></canvas>           
+            <canvas id="canvas" width="1455" height="191" style="background: url('fretboard.jpg')"></canvas>     
+              
         </div>
 
         <script type="text/javascript" src="class.js"></script>
-        <script type="text/javascript" src="functions.js"></script>
         <script type="text/javascript" src="fretboard.js"></script>
+        <script type="text/javascript" src="functions.js"></script>
         
     </body>
 </html>
