@@ -1,5 +1,6 @@
 //Define notes
 const numOfFrets = 23;
+const allFormats = ["Root", "Intervals", "Chords"]; //, "Scales" TODO Add scales.
 const allNotes = ["C", "C#/Db", "D", "D#/Eb", "E", "F", "F#/Gb", "G", "G#/Ab", "A", "A#/Bb", "B"];
 const allIntervals = ["P1", "m2", "M2", "m3", "M3", "P4", "d5", "P5", "m6", "M6", "m7", "M7"];
 const allChoords = [new Choord("major", ["P1", "M3", "P5"]),
@@ -119,6 +120,16 @@ function changeDropDowns() {
         el.textContent = opt;
         el.value = opt;
         selectRoot.appendChild(el);
+    });
+
+    // Populate drop down list for format:
+    var selectFormat = document.getElementById("selFormat");
+    allFormats.forEach(element => {
+        var opt = element;
+        var el = document.createElement("option");
+        el.textContent = opt;
+        el.value = opt;
+        selectFormat.appendChild(el);
     });
 
     // Populate drop down lists for chords
