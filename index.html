@@ -34,16 +34,32 @@
                 color: #38488f;
                 text-decoration: none;
             }
+
+            #topRightMenu {
+                float: right;
+                
+            }
+
+            #settings{
+                background-color:#29303B;
+                color:#DEDFE0;
+                width:200px;
+                display :none;
+            }
+
             @media (max-width: 700px) {
                 div {
                     margin: 1em auto;
                     width: max-content;
                 }
             }
+
+            
         </style> 
     </head>
     <body>
         <div class="mainContent" id="mainContent">
+            <div id="topRightMenu"><button onclick="ShowSettings()">Settings</button></div>
             <h1 id="Header">Visual Fretboard</h1>
             <p id="step1">
                 <label for="selRoot"><strong>Step1:</strong> Choose a root note:</label><br>
@@ -78,16 +94,21 @@
                     <select name="selChord" id="selChord"></select>
                 </p>
             </div>
-            <div id="settings">
-                <p>
-                    <select id="selTuning"></select>
-                    <select id="selText"></select>
-                    <button onclick="AddChord()">Add chord</button> 
-                </p>
-            </div>
+            
             <!-- 1455, 191-->
             <canvas id="canvas" width="1455" height="191" style="background: url('fretboard.jpg')"></canvas>     
-              
+            
+            
+        </div>
+
+        <div id="settings">
+            <p>
+                <label for="selTuning"><strong>Tuning:</strong></label>
+                <select id="selTuning"></select>
+                <label for="selText"><strong>Text settings:</strong></label>
+                <select id="selText"></select>
+                <!--<button onclick="AddChord()">Add chord</button>--> 
+            </p>
         </div>
 
         <script type="text/javascript" src="class.js"></script>

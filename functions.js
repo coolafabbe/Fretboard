@@ -70,3 +70,7 @@ function AddChord() {
     allChoords.push(chord);
     changeDropDowns();
 }
+
+function ShowSettings() {
+    document.getElementById("settings").style.display = "block";
+}
