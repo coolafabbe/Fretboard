@@ -72,5 +72,8 @@ function AddChord() {
 }
 
 function ShowSettings() {
-    document.getElementById("settings").style.display = "block";
+    if (document.getElementById("settings").style.display == "block")
+        document.getElementById("settings").style.display = "none"
+    else
+        document.getElementById("settings").style.display = "block";
 }

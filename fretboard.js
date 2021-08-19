@@ -74,6 +74,7 @@ function Update() {
     e = document.getElementById("selFormat");
     let format = e.options[e.selectedIndex].value;
     e = document.getElementById("selChord");
+
     choosenChoord = e.options[e.selectedIndex].value;
 
     // Fill array strings with notes, since the strings can be tuned differently.
@@ -114,6 +115,9 @@ function Update() {
 function changeDropDowns() {
     // Populate drop down list for root:
     var selectRoot = document.getElementById("selRoot");
+    for (i = selectRoot.length - 1; i >= 0; i--) {
+        selectRoot.remove(i);
+    }
     allNotes.forEach(element => {
         var opt = element;
         var el = document.createElement("option");
@@ -124,6 +128,9 @@ function changeDropDowns() {
 
     // Populate drop down list for format:
     var selectFormat = document.getElementById("selFormat");
+    for (i = selectFormat.length - 1; i >= 0; i--) {
+        selectFormat.remove(i);
+    }
     allFormats.forEach(element => {
         var opt = element;
         var el = document.createElement("option");
@@ -134,6 +141,9 @@ function changeDropDowns() {
 
     // Populate drop down lists for chords
     var selectChord = document.getElementById("selChord");
+    for (i = selectChord.length - 1; i >= 0; i--) {
+        selectChord.remove(i);
+    }
     allChoords.forEach(element => {
         var opt = element.getName();
         var el = document.createElement("option");
@@ -144,6 +154,9 @@ function changeDropDowns() {
 
     // Populate drop down lists for tunings
     var selectTuning = document.getElementById("selTuning");
+    for (i = selectTuning.length - 1; i >= 0; i--) {
+        selectTuning.remove(i);
+    }
     allTunings.forEach(element => {
         var opt = element.getName();
         var el = document.createElement("option");
@@ -153,6 +166,9 @@ function changeDropDowns() {
     });
 
     var selectText = document.getElementById("selText");
+    for (i = selectText.length - 1; i >= 0; i--) {
+        selectText.remove(i);
+    }
     noteView.forEach(element => {
         var el = document.createElement("option");
         el.textContent = element[1];
