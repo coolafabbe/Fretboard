@@ -27,6 +27,7 @@ const allChoords = [new Choord("major", ["P1", "M3", "P5"]),
 const allTunings = [new Tunings("Standard",         ["E", "B", "G", "D", "A", "E"]),
                     new Tunings("Drop D",           ["E", "B", "G", "D", "A", "D"]),
                     new Tunings("DAGDAD",           ["D", "A", "G", "D", "A", "D"]),
+                    new Tunings("Open D",           ["D", "A", "F#/Gb", "D", "A", "D"]),
                     new Tunings("Half-step Down",   ["D#/Eb", "A#/Bb", "F#/Gb", "C#/Db", "G#/Ab", "D#/Eb"]),
                     new Tunings("Whole-step Down",  ["D", "A", "F", "C", "G", "D"])];
 const noteView = [["Note", "Note names"], 
